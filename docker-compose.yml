@@ -1,0 +1,17 @@
+---
+domoticz:
+  image: 'my_domoticz:0.1'
+  restart: always
+  ports:
+    - "8080:8080"
+  volumes:
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    - '/opt/vc:/opt/vc:ro'
+    - '/home/ssejourne/domoticz/datadir/config/domoticz.db:/root/domoticz/domoticz.db:rw'
+  devices:
+    - /dev/ttyUSB0:/dev/ttyUSB0
+    - /dev/ttyAMA0:/dev/ttyUSB20
+    - /dev/vchiq:/dev/vchiq
+  environment:
+     - "LD_LIBRARY_PATH=/opt/vc/lib"

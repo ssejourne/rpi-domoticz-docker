@@ -38,9 +38,6 @@ RUN \
 # "install" in order to be found by domoticz
   ln -s /src/open-zwave /src/open-zwave-read-only && \
 
-# Link ttyUSB20 to zwave module on GPIO - pas marche...
-  ln -s /dev/ttyAMA0 /dev/ttyUSB20 && \
-
 # INSTALL domoticz
   wget https://releases.domoticz.com/releases/release/domoticz_linux_armv7l.tgz -O /tmp/domoticz_linux_armv7l.tgz && \
   mkdir /root/domoticz && \
@@ -54,9 +51,6 @@ RUN \
   apt-get clean && \
   apt-get autoclean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
-
-# Volume
-VOLUME /config
 
 # Expose port.
 EXPOSE 8080
