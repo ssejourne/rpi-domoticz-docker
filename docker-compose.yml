@@ -1,6 +1,6 @@
 ---
 domoticz:
-  image: 'my_domoticz:0.1'
+  image: 'seb_domoticz:0.4'
   restart: always
   ports:
     - "8080:8080"
@@ -12,6 +12,7 @@ domoticz:
   devices:
     - /dev/ttyUSB0:/dev/ttyUSB0
     - /dev/ttyAMA0:/dev/ttyUSB20
+    - /dev/ttyACM0:/dev/ttyUSB30
     - /dev/vchiq:/dev/vchiq
   environment:
      - "LD_LIBRARY_PATH=/opt/vc/lib"

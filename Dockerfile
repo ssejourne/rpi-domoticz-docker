@@ -24,9 +24,16 @@ RUN \
   	wget \
   	git && \
 
+# CLEANUP
+  apt-get autoremove -y && \
+  apt-get clean && \
+  apt-get autoclean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+
+RUN \
 # Fix libssl1.0.0 bug with domoticz
-  wget http://mirrordirector.raspbian.org/raspbian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u6_armhf.deb -O /tmp/libssl1.0.0_1.0.1t-1+deb8u6_armhf.deb && \
-  dpkg -i /tmp/libssl1.0.0_1.0.1t-1+deb8u6_armhf.deb && \
+  wget http://ftp.nl.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_armhf.deb -O /tmp/libssl1.0.0_1.0.2l-1~bpo8+1_armhf.deb && \
+  dpkg -i /tmp/libssl1.0.0_1.0.2l-1~bpo8+1_armhf.deb && \
 
 ## OpenZwave installation
 # grep git version of openzwave
@@ -36,21 +43,17 @@ RUN \
   make && \
 
 # "install" in order to be found by domoticz
-  ln -s /src/open-zwave /src/open-zwave-read-only && \
+  ln -s /src/open-zwave /src/open-zwave-read-only 
 
+RUN \
 # INSTALL domoticz
+#
   wget https://releases.domoticz.com/releases/release/domoticz_linux_armv7l.tgz -O /tmp/domoticz_linux_armv7l.tgz && \
   mkdir /root/domoticz && \
-  tar xvf /tmp/domoticz_linux_armv7l.tgz -C /root/domoticz && \
+  tar xvf /tmp/domoticz_linux_armv7l.tgz -C /root/domoticz 
 
 # ouimeaux
 ##pip3 install -U ouimeaux && \
-
-# CLEANUP
-  apt-get autoremove -y && \
-  apt-get clean && \
-  apt-get autoclean && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 # Expose port.
 EXPOSE 8080
